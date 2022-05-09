@@ -41,6 +41,9 @@ coverage.xml
 htmlcov
 nosetests.xml
 
+# virtual environment
+venv
+
 # C Extensions
 *.o
 *.so
