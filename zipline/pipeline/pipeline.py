@@ -1,4 +1,5 @@
 import six
+from typing import Optional
 
 from zipline.errors import UnsupportedPipelineOutput
 from zipline.utils.input_validation import (
@@ -43,7 +44,7 @@ class Pipeline(object):
         screen=optional(Filter),
         domain=Domain
     )
-    def __init__(self, columns=None, screen=None, domain=GENERIC):
+    def __init__(self, columns: Optional[dict]=None, screen: Optional[dict]=None, domain=GENERIC):
         if columns is None:
             columns = {}
 
@@ -131,7 +132,7 @@ class Pipeline(object):
         self._columns[name] = term
 
     @expect_types(name=str)
-    def remove(self, name):
+    def remove(self, name: str):
         """Remove a column.
 
         Parameters
@@ -264,7 +265,7 @@ class Pipeline(object):
 
     @staticmethod
     @expect_types(term=Term, column_name=six.string_types)
-    def validate_column(column_name, term):
+    def validate_column(column_name:str, term:Term):
         if term.ndim == 1:
             raise UnsupportedPipelineOutput(column_name=column_name, term=term)
 
@@ -283,7 +284,7 @@ class Pipeline(object):
         return terms
 
     @expect_types(default=Domain)
-    def domain(self, default):
+    def domain(self, default:Domain):
         """
         Get the domain for this pipeline.
 
